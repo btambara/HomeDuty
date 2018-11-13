@@ -30,4 +30,9 @@ public class SecurityTestController {
     public String getLoginPage(Model model) {
         return "login";
     }
+
+    @GetMapping(value = "/logout")
+    public String getLogoutPage(Model model) {
+        return "logout";
+    }
 }

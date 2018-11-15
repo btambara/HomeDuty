@@ -1,7 +1,13 @@
 .main-content{
     padding-top: 8px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+
+.jumbotron{
+    margin-bottom: 10px;
+    margin-top: 10px;
     background-color: #ffffff;
 }
 
@@ -9,19 +15,17 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60px;
     line-height: 60px;
     background-color: #ffffff;
-}
-
-.table{
-    padding: 20px;
 }
 
 .form-row{
     border-radius: 5px;
     padding-top: 8px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     background-color: #ffffff;
 }

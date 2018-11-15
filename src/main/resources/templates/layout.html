@@ -30,7 +30,7 @@
                             <a class="nav-link" href="#">Chores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Request</a>
+                            <a class="nav-link" href="#">Settings</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0" sec:authorize="isAnonymous()" th:action="@{/login}"
@@ -73,8 +73,8 @@
     <div layout:fragment="content"></div>
 </main>
 
-<footer class="footer">
-    <div class="row">
+<footer>
+    <div class="footer">
         <p class="text-center text-uppercase text-muted">&copy; Home Duty 2018</p>
     </div>
 </footer>

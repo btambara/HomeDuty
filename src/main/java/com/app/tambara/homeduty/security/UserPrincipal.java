@@ -2,10 +2,13 @@ package com.app.tambara.homeduty.security;
 
 import com.app.tambara.homeduty.domain.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserPrincipal implements UserDetails {
     private User user;
@@ -16,7 +19,13 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptySet();
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+        return grantedAuthorities;
     }
 
     @Override

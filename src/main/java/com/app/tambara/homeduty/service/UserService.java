@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
@@ -24,5 +26,17 @@ public class UserService implements UserDetailsService {
         }
 
         return new UserPrincipal(user);
+    }
+
+    public List<User> getAllUsersWithRole(String role) {
+        return userRepo.findAllByRole(role);
+    }
+
+    public User getUser(long userID) {
+        if (userRepo.findById(userID).isPresent()) {
+            return userRepo.findById(userID).get();
+        }
+
+        throw new UsernameNotFoundException("This user ID" + "[ " + userID + " ] does not exist");
     }
 }

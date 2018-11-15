@@ -14,6 +14,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final int DEFAULT_ROUNDS = 12;
+
     @Autowired
     private UserService userService;
 
@@ -21,7 +23,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userService);
-        authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(11));
+        authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(DEFAULT_ROUNDS));
         auth.authenticationProvider(authenticationProvider);
     }
 

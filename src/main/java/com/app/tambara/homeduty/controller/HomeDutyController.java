@@ -3,19 +3,20 @@ package com.app.tambara.homeduty.controller;
 import com.app.tambara.homeduty.domain.Duties;
 import com.app.tambara.homeduty.domain.Task;
 import com.app.tambara.homeduty.domain.User;
+import com.app.tambara.homeduty.security.UserPrincipal;
 import com.app.tambara.homeduty.service.DutiesService;
 import com.app.tambara.homeduty.service.TaskService;
 import com.app.tambara.homeduty.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -49,6 +50,24 @@ public class HomeDutyController {
         model.addAttribute("userTaskMap", userTaskMap);
 
         return "index";
+    }
+
+    @GetMapping(value = {"/duties"})
+    public String getUserDutiesPage(Model model, Authentication authentication) {
+        User user = userService.findByUsername(((UserPrincipal) authentication.getPrincipal()).getUsername());
+        List<Duties> userDuties = dutiesService.getDutiesForUserID(user.getId());
+        HashMap<Long, Task> taskMap = new HashMap<>();
+        userDuties.forEach(duties ->
+                taskMap.put(duties.getDutyID(), taskService.getTask(duties.getTaskID()))
+        );
+        model.addAttribute("taskMap", taskMap);
+        return "duties";
+    }
+
+    @GetMapping("/duties/{id}")
+    public String deleteDuty(@PathVariable Long id, Authentication authentication) {
+        dutiesService.deleteTask(id);
+        return "redirect:/duties/";
     }
 
     @GetMapping(value = {"/admin"})

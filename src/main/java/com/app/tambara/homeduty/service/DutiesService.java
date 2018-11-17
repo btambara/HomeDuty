@@ -18,6 +18,10 @@ public class DutiesService {
         return dutiesRepo.findAll();
     }
 
+    public void deleteTask(long dutiesID){
+        dutiesRepo.deleteById(dutiesID);
+    }
+
     public List<Duties> getDutiesForUserID(long userID) {
         return dutiesRepo.findAllByOwnerID(userID);
     }

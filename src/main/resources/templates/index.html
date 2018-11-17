@@ -6,10 +6,12 @@
 </head>
 <body class="bg-info">
 <div class="container" layout:fragment="content">
-    <div class="jumbotron">
-        <h1>Welcome</h1>
-        <p>Home Duty is
-            a web application that automatically assigns weekly home chores for each person in the household.</p>
+    <div class="form-row">
+        <div class="jumbotron">
+            <h1>Welcome</h1>
+            <p>Home Duty is
+                a web application that automatically assigns weekly home chores for each person in the household.</p>
+        </div>
     </div>
     <div class="form-row" th:each="entry:${userTaskMap}">
         <h1 th:text="${entry.key.username}"></h1>

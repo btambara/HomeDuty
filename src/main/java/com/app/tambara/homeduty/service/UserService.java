@@ -39,4 +39,13 @@ public class UserService implements UserDetailsService {
 
         throw new UsernameNotFoundException("This user ID" + "[ " + userID + " ] does not exist");
     }
+
+    public User findByUsername(String username) {
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("This username " + "[ " + username + " ] does not exist");
+        }
+
+        return user;
+    }
 }
